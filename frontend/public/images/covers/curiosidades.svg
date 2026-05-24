@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 480" role="img" aria-label="Curiosidades">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f2847"/>
+      <stop offset="100%" stop-color="#0c1222"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="480" fill="url(#bg)"/>
+  <circle cx="400" cy="240" r="90" fill="#1a5c34" opacity="0.5"/>
+  <path d="M400 150 L400 330 M310 240 L490 240" stroke="#fff" stroke-width="3" opacity="0.2"/>
+  <circle cx="400" cy="240" r="70" fill="none" stroke="#c9a227" stroke-width="3"/>
+  <path d="M360 200 Q400 160 440 200 Q400 280 360 200" fill="#f8fafc" opacity="0.85"/>
+  <path d="M370 210 L430 210 L400 250 Z" fill="#1a2438" opacity="0.3"/>
+</svg>

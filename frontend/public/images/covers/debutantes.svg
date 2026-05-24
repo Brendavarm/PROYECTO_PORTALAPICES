@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 480" role="img" aria-label="Debutantes">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0c1222"/>
+      <stop offset="100%" stop-color="#1a2d4a"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="480" fill="url(#bg)"/>
+  <text x="400" y="200" text-anchor="middle" fill="#c9a227" font-family="system-ui" font-size="120" font-weight="800" opacity="0.35">NEW</text>
+  <circle cx="280" cy="300" r="40" fill="#3b82f6" opacity="0.3"/>
+  <circle cx="400" cy="280" r="50" fill="#c9a227" opacity="0.4"/>
+  <circle cx="520" cy="310" r="36" fill="#22c55e" opacity="0.25"/>
+  <path d="M200 400 L600 400" stroke="#e4c04d" stroke-width="2" opacity="0.5"/>
+</svg>

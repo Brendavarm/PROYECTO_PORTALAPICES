@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 520" role="img" aria-label="GoalDesk organizador 3D">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1a2d4a"/>
+      <stop offset="50%" stop-color="#243b5c"/>
+      <stop offset="100%" stop-color="#152238"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#e4c04d"/>
+      <stop offset="100%" stop-color="#c9a227"/>
+    </linearGradient>
+    <linearGradient id="desk" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#2a4060"/>
+      <stop offset="100%" stop-color="#1a2438"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="8" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="400" height="520" fill="url(#bg)"/>
+  <ellipse cx="200" cy="480" rx="160" ry="28" fill="#000" opacity="0.35"/>
+  <!-- Mesa -->
+  <rect x="40" y="380" width="320" height="24" rx="4" fill="url(#desk)"/>
+  <!-- Organizador principal -->
+  <g filter="url(#glow)">
+    <path d="M100 140 L300 140 L320 360 L80 360 Z" fill="#1a2438" stroke="url(#gold)" stroke-width="3"/>
+    <path d="M115 165 L285 165 L298 195 L102 195 Z" fill="#0f1829"/>
+    <rect x="130" y="210" width="70" height="90" rx="8" fill="#0c1222" stroke="#3b82f6" stroke-width="2"/>
+    <rect x="210" y="210" width="85" height="55" rx="8" fill="#0c1222" stroke="url(#gold)" stroke-width="2"/>
+    <rect x="210" y="275" width="85" height="50" rx="8" fill="#152238" stroke="#3b82f6" stroke-width="1.5"/>
+    <!-- Soporte celular -->
+    <rect x="155" y="95" width="90" height="55" rx="10" fill="#243b5c" stroke="url(#gold)" stroke-width="2.5"/>
+    <rect x="168" y="102" width="64" height="40" rx="4" fill="#0f1628"/>
+    <rect x="178" y="108" width="44" height="28" rx="2" fill="#3b82f6" opacity="0.4"/>
+  </g>
+  <!-- Balón decorativo -->
+  <circle cx="320" cy="120" r="36" fill="#f8fafc" opacity="0.95"/>
+  <circle cx="320" cy="120" r="36" fill="none" stroke="#1e293b" stroke-width="1.5"/>
+  <path d="M320 92 L332 112 L320 132 L308 112 Z" fill="none" stroke="#334155" stroke-width="1"/>
+  <path d="M292 120 L308 120 M332 120 L348 120" stroke="#334155" stroke-width="1"/>
+  <!-- Texto marca -->
+  <text x="200" y="420" text-anchor="middle" fill="#e4c04d" font-family="system-ui,sans-serif" font-size="18" font-weight="800">GoalDesk Smart</text>
+  <text x="200" y="445" text-anchor="middle" fill="#94a3b8" font-family="system-ui,sans-serif" font-size="12">Organizador 3D · Mundial 2026</text>
+</svg>

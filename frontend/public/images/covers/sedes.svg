@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 480" role="img" aria-label="Estadio">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0a1628"/>
+      <stop offset="60%" stop-color="#152238"/>
+      <stop offset="100%" stop-color="#1a5c34" opacity="0.4"/>
+    </linearGradient>
+    <radialGradient id="lights" cx="50%" cy="0%" r="80%">
+      <stop offset="0%" stop-color="#e4c04d" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#e4c04d" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="800" height="480" fill="url(#bg)"/>
+  <rect width="800" height="480" fill="url(#lights)"/>
+  <ellipse cx="400" cy="400" rx="350" ry="100" fill="#1a5c34" opacity="0.6"/>
+  <path d="M80 400 Q400 120 720 400" fill="none" stroke="#c9a227" stroke-width="2" opacity="0.4"/>
+  <path d="M120 400 L200 280 L600 280 L680 400 Z" fill="#243b5c" opacity="0.8"/>
+  <path d="M200 280 L400 180 L600 280 Z" fill="#1e3a5f"/>
+</svg>

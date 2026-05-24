@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 480" role="img" aria-label="Calendario">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#151d32"/>
+      <stop offset="100%" stop-color="#0c1222"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="480" fill="url(#bg)"/>
+  <rect x="220" y="80" width="360" height="320" rx="16" fill="#1a2438" stroke="#c9a227" stroke-width="2"/>
+  <rect x="220" y="80" width="360" height="56" rx="16" fill="#c9a227"/>
+  <text x="400" y="118" text-anchor="middle" fill="#0c1222" font-family="system-ui" font-size="22" font-weight="800">JUN  JUL 2026</text>
+  <g fill="#3b82f6" opacity="0.35">
+    <rect x="250" y="160" width="48" height="48" rx="6"/>
+    <rect x="310" y="160" width="48" height="48" rx="6"/>
+    <rect x="370" y="160" width="48" height="48" rx="6" fill="#c9a227" opacity="0.6"/>
+    <rect x="430" y="160" width="48" height="48" rx="6"/>
+    <rect x="490" y="160" width="48" height="48" rx="6"/>
+    <rect x="250" y="220" width="48" height="48" rx="6"/>
+    <rect x="310" y="220" width="48" height="48" rx="6" fill="#c9a227" opacity="0.5"/>
+    <rect x="370" y="220" width="48" height="48" rx="6"/>
+  </g>
+</svg>

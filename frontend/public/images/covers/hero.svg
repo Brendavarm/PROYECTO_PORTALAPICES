@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-label="Mundial 2026">
+  <defs>
+    <linearGradient id="sky" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0a1628"/>
+      <stop offset="40%" stop-color="#152238"/>
+      <stop offset="100%" stop-color="#0c1222"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="70%" cy="30%" r="50%">
+      <stop offset="0%" stop-color="#c9a227" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#c9a227" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1600" height="900" fill="url(#sky)"/>
+  <rect width="1600" height="900" fill="url(#glow)"/>
+  <ellipse cx="800" cy="750" rx="700" ry="200" fill="#1a5c34" opacity="0.35"/>
+  <circle cx="1100" cy="350" r="180" fill="#c9a227" opacity="0.12"/>
+  <path d="M200 750 Q800 200 1400 750" fill="none" stroke="#c9a227" stroke-width="2" opacity="0.2"/>
+</svg>

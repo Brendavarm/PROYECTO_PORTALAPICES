@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="GoalDesk Smart 2026 — Organizador inteligente inspirado en el Mundial FIFA 2026. Emprendimiento UNIFRANZ, Ingeniería de Sistemas.">
+  <title>GoalDesk Smart 2026 | Experiencia Tecnológica</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- Loading Screen -->
+  <div id="loader" class="loader" aria-hidden="true">
+    <div class="loader-inner">
+      <div class="loader-ball"></div>
+      <p class="loader-text">GoalDesk Smart 2026</p>
+      <div class="loader-bar"><span></span></div>
+      <p class="loader-sub">Iniciando experiencia digital...</p>
+    </div>
+  </div>
+
+  <!-- Custom Cursor -->
+  <div class="cursor-dot" id="cursorDot"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <!-- Particles Canvas -->
+  <canvas id="particles-canvas" aria-hidden="true"></canvas>
+
+  <!-- Navigation -->
+  <header class="header" id="header">
+    <nav class="nav container">
+      <a href="#hero" class="nav-logo">
+        <span class="logo-icon">⚽</span>
+        <span>GoalDesk<span class="gold">2026</span></span>
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="#producto">Producto</a></li>
+        <li><a href="#mundial">Mundial 2026</a></li>
+        <li><a href="#personaliza">Personaliza</a></li>
+        <li><a href="#tecnologia">Tecnología</a></li>
+        <li><a href="#galeria">Galería</a></li>
+        <li><a href="#innovacion">Innovación</a></li>
+        <li><a href="#qr-section" class="nav-cta">QR Digital</a></li>
+      </ul>
+      <button class="sound-btn" id="soundBtn" aria-label="Activar sonido de estadio" title="Sonido ambiente">
+        <svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+      </button>
+    </nav>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero" id="hero">
+      <div class="hero-bg">
+        <div class="hero-grid"></div>
+        <div class="hero-glow hero-glow-1"></div>
+        <div class="hero-glow hero-glow-2"></div>
+      </div>
+      <div class="container hero-content">
+        <div class="hero-text" data-aos="fade-right" data-aos-duration="1000">
+          <span class="hero-badge">UNIFRANZ · Ingeniería de Sistemas</span>
+          <h1 class="hero-title">
+            <span class="title-line">GoalDesk</span>
+            <span class="title-line gold-gradient">Smart 2026</span>
+          </h1>
+          <p class="hero-subtitle">El organizador inteligente inspirado en el Mundial FIFA 2026</p>
+          <p class="hero-desc">Portalápices impreso en 3D con temática mundialista, integración digital QR y diseño premium para tu escritorio.</p>
+          <div class="hero-actions">
+            <a href="#producto" class="btn btn-primary" id="exploreBtn">Explorar Proyecto</a>
+            <a href="#personaliza" class="btn btn-outline">Personalizar</a>
+          </div>
+          <div class="hero-stats">
+            <div class="stat"><span class="stat-num" data-count="48">0</span><span class="stat-label">Selecciones</span></div>
+            <div class="stat"><span class="stat-num" data-count="104">0</span><span class="stat-label">Partidos</span></div>
+            <div class="stat"><span class="stat-num" data-count="3">0</span><span class="stat-label">Países sede</span></div>
+          </div>
+        </div>
+        <div class="hero-visual" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="200">
+          <div class="hologram-card" id="hologramCard">
+            <div class="hologram-shine"></div>
+            <div class="product-3d" id="product3d">
+              <div class="product-mockup">
+                <div class="mockup-top"></div>
+                <div class="mockup-body">
+                  <div class="mockup-pentagon"></div>
+                  <div class="mockup-pentagon"></div>
+                  <div class="mockup-pentagon"></div>
+                  <div class="mockup-slot"></div>
+                  <div class="mockup-slot"></div>
+                  <div class="mockup-phone"></div>
+                </div>
+                <div class="mockup-led"></div>
+                <div class="mockup-qr"></div>
+              </div>
+            </div>
+            <div class="orbit-ring"></div>
+          </div>
+        </div>
+      </div>
+      <a href="#producto" class="scroll-indicator" aria-label="Desplazar hacia abajo">
+        <span></span>
+      </a>
+    </section>
+
+    <!-- PRODUCTO -->
+    <section class="section product" id="producto">
+      <div class="container">
+        <div class="section-header" data-aos="fade-up">
+          <span class="section-tag">Sobre el producto</span>
+          <h2 class="section-title">¿Qué es <span class="gold">GoalDesk</span>?</h2>
+          <p class="section-desc">Un organizador de escritorio inteligente que fusiona impresión 3D, diseño mundialista y experiencia digital — nacido en UNIFRANZ como emprendimiento de Ingeniería de Sistemas.</p>
+        </div>
+        <div class="product-story" data-aos="fade-up" data-aos-delay="100">
+          <div class="story-block glass">
+            <h3>Por qué existe</h3>
+            <p>GoalDesk Smart 2026 transforma un accesorio cotidiano en una pieza tecnológica con identidad. Inspirado en la energía del Mundial FIFA 2026, combina funcionalidad, estética de balón de fútbol y conexión digital mediante QR.</p>
+          </div>
+          <div class="story-block glass">
+            <h3>Ingeniería de Sistemas + UNIFRANZ</h3>
+            <p>Desarrollado por estudiantes de Ingeniería de Sistemas de UNIFRANZ, el proyecto integra modelado 3D, diseño UX/UI, programación web y visión de producto IoT — demostrando que la innovación universitaria puede competir con startups tecnológicas.</p>
+          </div>
+          <div class="story-block glass">
+            <h3>Impresión 3D & Innovación</h3>
+            <p>Fabricado con tecnología de impresión 3D (FDM/Resina), cada GoalDesk es personalizable, sostenible y escalable. La estructura evoca un balón de fútbol con compartimentos funcionales y soporte para dispositivos móviles.</p>
+          </div>
+        </div>
+        <div class="feature-cards">
+          <article class="feature-card glass" data-aos="fade-up" data-aos-delay="0">
+            <div class="feature-icon">🖨️</div>
+            <h4>Impresión 3D</h4>
+            <p>Prototipado rápido y producción personalizada con materiales de alta calidad.</p>
+          </article>
+          <article class="feature-card glass" data-aos="fade-up" data-aos-delay="100">
+            <div class="feature-icon">📱</div>
+            <h4>QR Interactivo</h4>
+            <p>Conecta el producto físico con redes sociales, catálogo y experiencia digital.</p>
+          </article>
+          <article class="feature-card glass" data-aos="fade-up" data-aos-delay="200">
+            <div class="feature-icon">📲</div>
+            <h4>Soporte Celular</h4>
+            <p>Base ergonómica integrada para videollamadas, streams y productividad.</p>
+          </article>
+          <article class="feature-card glass" data-aos="fade-up" data-aos-delay="300">
+            <div class="feature-icon">✨</div>
+            <h4>Personalización</h4>
+            <p>Nombre, carrera, colores y selección favorita del Mundial 2026.</p>
+          </article>
+          <article class="feature-card glass" data-aos="fade-up" data-aos-delay="400">
+            <div class="feature-icon">💡</div>
+            <h4>Iluminación LED</h4>
+            <p>Expansión futura con ESP32 y LEDs inteligentes para ambientación.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- MUNDIAL 2026 -->
+    <section class="section worldcup" id="mundial">
+      <div class="container">
+        <div class="section-header" data-aos="fade-up">
+          <span class="section-tag">Experiencia Mundial</span>
+          <h2 class="section-title">FIFA World Cup <span class="gold">2026</span></h2>
+          <p class="section-desc">El torneo más grande de la historia: 48 selecciones, 104 partidos y tres naciones anfitrionas.</p>
+        </div>
+
+        <div class="countdown-wrapper glass" data-aos="zoom-in">
+          <h3 class="countdown-title">Cuenta regresiva al Mundial</h3>
+          <div class="countdown" id="countdown">
+            <div class="countdown-item"><span id="cd-days">00</span><small>Días</small></div>
+            <div class="countdown-item"><span id="cd-hours">00</span><small>Horas</small></div>
+            <div class="countdown-item"><span id="cd-mins">00</span><small>Min</small></div>
+            <div class="countdown-item"><span id="cd-secs">00</span><small>Seg</small></div>
+          </div>
+          <p class="countdown-date">Inicio: 11 de junio de 2026</p>
+        </div>
+
+        <div class="hosts" data-aos="fade-up">
+          <h3 class="hosts-title">Países anfitriones</h3>
+          <div class="hosts-grid">
+            <div class="host-card glass">
+              <span class="host-flag">🇺🇸</span>
+              <h4>Estados Unidos</h4>
+              <p>Sedes en Nueva York, Los Ángeles, Dallas y más.</p>
+            </div>
+            <div class="host-card glass">
+              <span class="host-flag">🇲🇽</span>
+              <h4>México</h4>
+              <p>El Azteca y estadios icónicos de la CONCACAF.</p>
+            </div>
+            <div class="host-card glass">
+              <span class="host-flag">🇨🇦</span>
+              <h4>Canadá</h4>
+              <p>Primera Copa del Mundo masculina en suelo canadiense.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="facts-timeline">
+          <div class="facts" data-aos="fade-right">
+            <h3>Datos curiosos</h3>
+            <ul class="facts-list">
+              <li><strong>48</strong> selecciones participantes — récord histórico</li>
+              <li><strong>104</strong> partidos en total</li>
+              <li>Primera Copa Mundial con <strong>tres países</strong> sede</li>
+              <li>Formato ampliado con fase de grupos de 12 grupos de 4</li>
+              <li>Mayor Mundial en extensión territorial de la historia</li>
+            </ul>
+          </div>
+          <div class="timeline" data-aos="fade-left">
+            <h3>Línea de tiempo</h3>
+            <div class="timeline-track">
+              <div class="timeline-item"><span class="tl-year">2022</span><p>Qatar 2022 — último Mundial de 32 equipos</p></div>
+              <div class="timeline-item active"><span class="tl-year">2026</span><p>USA · México · Canadá — 48 selecciones</p></div>
+              <div class="timeline-item"><span class="tl-year">2030</span><p>Próxima edición centenario (por confirmar)</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="stadiums" data-aos="fade-up">
+          <h3>Estadios emblemáticos</h3>
+          <div class="stadiums-grid">
+            <div class="stadium-card glass"><span>🏟️</span><h4>Estadio Azteca</h4><p>Ciudad de México</p></div>
+            <div class="stadium-card glass"><span>🏟️</span><h4>MetLife Stadium</h4><p>Nueva York / Nueva Jersey</p></div>
+            <div class="stadium-card glass"><span>🏟️</span><h4>SoFi Stadium</h4><p>Los Ángeles</p></div>
+            <div class="stadium-card glass"><span>🏟️</span><h4>BC Place</h4><p>Vancouver, Canadá</p></div>
+          </div>
+        </div>
+
+        <div class="ball-animation" id="ballAnimation" aria-hidden="true">
+          <div class="floating-ball">⚽</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PERSONALIZACIÓN -->
+    <section class="section customize" id="personaliza">
+      <div class="container">
+        <div class="section-header" data-aos="fade-up">
+          <span class="section-tag">Configurador</span>
+          <h2 class="section-title">Personaliza tu <span class="gold">GoalDesk</span></h2>
+          <p class="section-desc">Simula tu diseño único antes de fabricarlo.</p>
+        </div>
+        <div class="customize-layout">
+          <div class="customize-form glass" data-aos="fade-right">
+            <label for="userName">Tu nombre</label>
+            <input type="text" id="userName" placeholder="Ej: María González" maxlength="24">
+
+            <label>Color principal</label>
+            <div class="color-picker" id="colorPicker">
+              <button class="color-opt active" data-color="#1a237e" style="--c:#1a237e" aria-label="Azul oscuro"></button>
+              <button class="color-opt" data-color="#d4af37" style="--c:#d4af37" aria-label="Dorado"></button>
+              <button class="color-opt" data-color="#ffffff" style="--c:#ffffff" aria-label="Blanco"></button>
+              <button class="color-opt" data-color="#0d1117" style="--c:#0d1117" aria-label="Negro"></button>
+              <button class="color-opt" data-color="#c62828" style="--c:#c62828" aria-label="Rojo"></button>
+              <button class="color-opt" data-color="#2e7d32" style="--c:#2e7d32" aria-label="Verde"></button>
+            </div>
+
+            <label for="userCareer">Carrera</label>
+            <select id="userCareer">
+              <option value="Ing. Sistemas">Ingeniería de Sistemas</option>
+              <option value="Ing. Industrial">Ingeniería Industrial</option>
+              <option value="Administración">Administración de Empresas</option>
+              <option value="Diseño">Diseño Gráfico</option>
+              <option value="Otra">Otra carrera UNIFRANZ</option>
+            </select>
+
+            <label for="userTeam">Selección favorita</label>
+            <select id="userTeam">
+              <option value="🇧🇴 Bolivia">🇧🇴 Bolivia</option>
+              <option value="🇦🇷 Argentina">🇦🇷 Argentina</option>
+              <option value="🇧🇷 Brasil">🇧🇷 Brasil</option>
+              <option value="🇲🇽 México">🇲🇽 México</option>
+              <option value="🇺🇸 EE.UU.">🇺🇸 Estados Unidos</option>
+              <option value="🇪🇸 España">🇪🇸 España</option>
+              <option value="🇫🇷 Francia">🇫🇷 Francia</option>
+              <option value="🇩🇪 Alemania">🇩🇪 Alemania</option>
+            </select>
+          </div>
+          <div class="preview-panel glass" data-aos="fade-left">
+            <h3>Vista previa</h3>
+            <div class="preview-desk" id="previewDesk">
+              <div class="preview-body" id="previewBody">
+                <div class="preview-pattern"></div>
+                <div class="preview-name" id="previewName">TU NOMBRE</div>
+                <div class="preview-career" id="previewCareer">Ing. Sistemas</div>
+                <div class="preview-team" id="previewTeam">🇧🇴 Bolivia</div>
+                <div class="preview-led-bar"></div>
+              </div>
+            </div>
+            <p class="preview-hint">Los cambios se aplican en tiempo real</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TECNOLOGÍA -->
+    <section class="section tech" id="tecnologia">
+      <div class="container">
+        <div class="section-header" data-aos="fade-up">
+          <span class="section-tag">Stack tecnológico</span>
+          <h2 class="section-title">Ingeniería detrás del <span class="gold">proyecto</span></h2>
+        </div>
+        <div class="tech-grid">
+          <div class="tech-item glass" data-aos="flip-left" data-aos-delay="0">
+            <div class="tech-icon">🎨</div>
+            <h4>Modelado 3D</h4>
+            <p>Blender / Fusion 360 para diseño paramétrico del balón-organizador.</p>
+          </div>
+          <div class="tech-item glass" data-aos="flip-left" data-aos-delay="100">
+            <div class="tech-icon">🖨️</div>
+            <h4>Impresión 3D</h4>
+            <p>PLA/PETG con acabado premium y tolerancias precisas.</p>
+          </div>
+          <div class="tech-item glass" data-aos="flip-left" data-aos-delay="200">
+            <div class="tech-icon">&lt;/&gt;</div>
+            <h4>HTML / CSS / JS</h4>
+            <p>Experiencia web interactiva para exposición y marketing digital.</p>
+          </div>
+          <div class="tech-item glass" data-aos="flip-left" data-aos-delay="300">
+            <div class="tech-icon">📲</div>
+            <h4>QR Interactivo</h4>
+            <p>Puente entre producto físico y ecosistema digital del emprendimiento.</p>
+          </div>
+          <div class="tech-item glass" data-aos="flip-left" data-aos-delay="400">
+            <div class="tech-icon">⚡</div>
+            <h4>ESP32 + LEDs</h4>
+            <p>Expansión IoT: iluminación RGB, sensores y control por app (futuro).</p>
+          </div>
+          <div class="tech-item glass" data-aos="flip-left" data-aos-delay="500">
+            <div class="tech-icon">🎯</div>
+            <h4>UX / UI</h4>
+            <p>Diseño centrado en el usuario para exposiciones universitarias.</p>
+          </div>
+        </div>
+
+        <div class="future-versions glass" data-aos="fade-up">
+          <h3>Futuras versiones inteligentes</h3>
+          <div class="future-list">
+            <span class="future-chip">GoalDesk Pro + App móvil</span>
+            <span class="future-chip">Sensores de temperatura/humedad</span>
+            <span class="future-chip">Carga inalámbrica integrada</span>
+            <span class="future-chip">Edición coleccionista Mundial</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- QR -->
+    <section class="section qr-section" id="qr-section">
+      <div class="container">
+        <div class="section-header" data-aos="fade-up">
+          <span class="section-tag">Experiencia digital</span>
+          <h2 class="section-title">QR <span class="gold">Interactivo</span></h2>
+          <p class="section-desc">Haz clic en el código QR para conectar el mundo físico con el digital.</p>
+        </div>
+        <div class="qr-simulator" data-aos="zoom-in">
+          <button class="qr-code glass" id="qrTrigger" aria-label="Escanear QR simulado">
+            <canvas id="qrCanvas" width="180" height="180"></canvas>
+            <span class="qr-scan-line"></span>
+            <p class="qr-hint">Toca para escanear</p>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- GALERÍA -->
+    <section class="section gallery" id="galeria">
+      <div class="container">
+        <div class="section-header" data-aos="fade-up">
+          <span class="section-tag">Prototipo</span>
+          <h2 class="section-title">Galería del <span class="gold">prototipo</span></h2>
+        </div>
+        <div class="gallery-slider" data-aos="fade-up">
+          <button class="gallery-nav prev" id="galleryPrev" aria-label="Anterior">‹</button>
+          <div class="gallery-track" id="galleryTrack">
+            <div class="gallery-slide active">
+              <div class="gallery-img placeholder-1">
+                <span>Vista frontal — Prototipo 3D</span>
+              </div>
+              <p>Render principal del GoalDesk Smart 2026</p>
+            </div>
+            <div class="gallery-slide">
+              <div class="gallery-img placeholder-2">
+                <span>Vista superior — Compartimentos</span>
+              </div>
+              <p>Organización de útiles y accesorios</p>
+            </div>
+            <div class="gallery-slide">
+              <div class="gallery-img placeholder-3">
+                <span>Detalle QR + LED</span>
+              </div>
+              <p>Integración digital e iluminación</p>
+            </div>
+            <div class="gallery-slide">
+              <div class="gallery-img placeholder-4">
+                <span>Soporte móvil en uso</span>
+              </div>
+              <p>Funcionalidad ergonómica demostrada</p>
+            </div>
+          </div>
+          <button class="gallery-nav next" id="galleryNext" aria-label="Siguiente">›</button>
+        </div>
+        <div class="gallery-dots" id="galleryDots"></div>
+        <div class="gallery-thumbs">
+          <button class="thumb active" data-index="0">01</button>
+          <button class="thumb" data-index="1">02</button>
+          <button class="thumb" data-index="2">03</button>
+          <button class="thumb" data-index="3">04</button>
+        </div>
+      </div>
+      <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" id="lightboxClose" aria-label="Cerrar">×</button>
+        <div class="lightbox-content" id="lightboxContent"></div>
+      </div>
+    </section>
+
+    <!-- INNOVACIÓN -->
+    <section class="section innovation" id="innovacion">
+      <div class="container">
+        <div class="section-header" data-aos="fade-up">
+          <span class="section-tag">Diferenciador</span>
+          <h2 class="section-title">¿Por qué es <span class="gold">innovador</span>?</h2>
+        </div>
+        <div class="compare-table glass" data-aos="fade-up">
+          <div class="compare-header">
+            <span></span>
+            <span>Producto tradicional</span>
+            <span class="gold">GoalDesk Smart 2026</span>
+          </div>
+          <div class="compare-row">
+            <span>Tecnología</span>
+            <span class="bad">❌ Ninguna</span>
+            <span class="good">✅ 3D + QR + IoT futuro</span>
+          </div>
+          <div class="compare-row">
+            <span>Personalización</span>
+            <span class="bad">❌ Genérico</span>
+            <span class="good">✅ Nombre, carrera, equipo</span>
+          </div>
+          <div class="compare-row">
+            <span>Interacción digital</span>
+            <span class="bad">❌ Estático</span>
+            <span class="good">✅ QR + web experiencia</span>
+          </div>
+          <div class="compare-row">
+            <span>Diseño</span>
+            <span class="bad">❌ Básico</span>
+            <span class="good">✅ Temática Mundial 2026</span>
+          </div>
+          <div class="compare-row">
+            <span>Origen</span>
+            <span class="bad">❌ Industrial masivo</span>
+            <span class="good">✅ Emprendimiento UNIFRANZ</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <h3>GoalDesk Smart 2026</h3>
+          <p class="footer-tagline">Transformando un accesorio de escritorio en una experiencia tecnológica.</p>
+          <div class="footer-uni">
+            <strong>UNIFRANZ</strong> · Ingeniería de Sistemas
+          </div>
+        </div>
+        <div class="footer-team">
+          <h4>Equipo emprendedor</h4>
+          <ul>
+            <li>Integrante 1 — Desarrollo & 3D</li>
+            <li>Integrante 2 — Diseño & UX/UI</li>
+            <li>Integrante 3 — Marketing & QR</li>
+            <li>Integrante 4 — IoT & Documentación</li>
+          </ul>
+          <p class="footer-note"><em>Actualiza los nombres de tu equipo aquí</em></p>
+        </div>
+        <div class="footer-social">
+          <h4>Redes</h4>
+          <a href="#" class="social-link">Instagram</a>
+          <a href="#" class="social-link">WhatsApp</a>
+          <a href="#" class="social-link">LinkedIn</a>
+          <a href="#qr-section" class="social-link">Catálogo QR</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 GoalDesk Smart · Proyecto académico UNIFRANZ · Mundial FIFA 2026</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- QR Modal -->
+  <div class="modal" id="qrModal" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
+    <div class="modal-backdrop" id="modalBackdrop"></div>
+    <div class="modal-content glass">
+      <button class="modal-close" id="modalClose" aria-label="Cerrar">×</button>
+      <div class="modal-scan-effect"></div>
+      <h2 id="modalTitle">Conectando experiencia física y digital</h2>
+      <p class="modal-sub">GoalDesk Smart 2026 — Ecosistema digital</p>
+      <div class="modal-links">
+        <a href="https://wa.me/" target="_blank" rel="noopener" class="modal-link whatsapp">
+          <span>💬</span> WhatsApp
+        </a>
+        <a href="https://instagram.com/" target="_blank" rel="noopener" class="modal-link instagram">
+          <span>📸</span> Instagram
+        </a>
+        <a href="#galeria" class="modal-link catalog" id="modalCatalog">
+          <span>📋</span> Catálogo
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mini Chatbot -->
+  <div class="chatbot" id="chatbot">
+    <button class="chatbot-toggle" id="chatToggle" aria-label="Asistente IA">
+      <span class="chat-icon">🤖</span>
+    </button>
+    <div class="chatbot-panel glass" id="chatPanel">
+      <div class="chat-header">
+        <span>GoalDesk AI</span>
+        <button id="chatClose" aria-label="Cerrar chat">×</button>
+      </div>
+      <div class="chat-messages" id="chatMessages">
+        <div class="chat-msg bot">¡Hola! Soy el asistente de GoalDesk Smart 2026. ¿En qué puedo ayudarte?</div>
+      </div>
+      <div class="chat-quick">
+        <button data-msg="¿Qué es GoalDesk?">¿Qué es?</button>
+        <button data-msg="¿Cómo personalizar?">Personalizar</button>
+        <button data-msg="¿Precio?">Precio</button>
+      </div>
+      <input type="text" id="chatInput" placeholder="Escribe tu pregunta..." autocomplete="off">
+    </div>
+  </div>
+
+  <audio id="stadiumAudio" preload="auto" loop>
+    <!-- Sonido ambiente generado por Web Audio en JS si no hay archivo -->
+  </audio>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+{
+  "name": "goaldesk-smart-2026",
+  "private": true,
+  "version": "1.0.0",
+  "description": "GoalDesk Smart 2026 — monorepo UNIFRANZ (frontend + backend)",
+  "scripts": {
+    "install:all": "npm install --prefix backend && npm install --prefix frontend",
+    "dev:backend": "npm run dev --prefix backend",
+    "dev:frontend": "npm run dev --prefix frontend",
+    "db:push": "npm run db:push --prefix backend",
+    "db:seed": "npm run db:seed --prefix backend",
+    "build:frontend": "npm run build --prefix frontend",
+    "tunnel:cloudflare": "cloudflared tunnel --url http://localhost:5173",
+    "tunnel:lt": "npx --yes localtunnel --port 5173"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Brendavarm/PROYECTO_PORTALAPICES.git"
+  },
+  "keywords": [
+    "unifranz",
+    "react",
+    "express",
+    "prisma",
+    "mundial-2026"
+  ],
+  "author": "Equipo GoalDesk Smart — Ingeniería de Sistemas UNIFRANZ",
+  "license": "UNLICENSED"
+}

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 480" role="img" aria-label="Historia">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1a0f05"/>
+      <stop offset="50%" stop-color="#0c1222"/>
+      <stop offset="100%" stop-color="#152238"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="480" fill="url(#bg)"/>
+  <circle cx="400" cy="200" r="100" fill="none" stroke="#c9a227" stroke-width="4" opacity="0.6"/>
+  <circle cx="400" cy="200" r="70" fill="#c9a227" opacity="0.15"/>
+  <rect x="360" y="60" width="80" height="90" rx="8" fill="url(#gold)" opacity="0.9"/>
+  <defs><linearGradient id="gold" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#e4c04d"/><stop offset="100%" stop-color="#c9a227"/></linearGradient></defs>
+  <ellipse cx="400" cy="380" rx="120" ry="24" fill="#000" opacity="0.35"/>
+</svg>
