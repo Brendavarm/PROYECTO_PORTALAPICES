@@ -29,7 +29,9 @@ export function useQrBaseUrl() {
       return;
     }
 
-    const browserUrl = normalizeBase(getPublicAppUrl());
+    const browserUrl = normalizeBase(
+      typeof window !== 'undefined' ? window.location.origin : getPublicAppUrl()
+    );
     if (!isLocalhostUrl(browserUrl)) {
       setBaseUrl(browserUrl);
       setSource('navegador');
@@ -44,10 +46,10 @@ export function useQrBaseUrl() {
       setCandidates(list);
       setInterfaceOptions(data.interfaces || []);
 
-      const suggested = normalizeBase(data.suggestedAppUrl);
-      if (suggested) {
-        setBaseUrl(suggested);
-        setSource('red-local');
+      const publicUrl = normalizeBase(data.publicAppUrl || data.suggestedAppUrl);
+      if (publicUrl && !isLocalhostUrl(publicUrl)) {
+        setBaseUrl(publicUrl);
+        setSource(data.qrMode === 'internet' ? 'internet' : 'red-local');
         setLoading(false);
         return;
       }

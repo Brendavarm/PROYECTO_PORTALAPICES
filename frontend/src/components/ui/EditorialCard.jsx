@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import MediaImage from './MediaImage';
 import FeatureIcon from './FeatureIcon';
+import { resolveImage } from '../../data/siteImages';
 
 const cardMotion = {
   rest: { y: 0 },
@@ -24,7 +25,14 @@ export default function EditorialCard({
   featured = false,
   onClick,
   as = 'link',
+  imageFallback,
 }) {
+  const img = resolveImage(
+    typeof imageSrc === 'object' && imageSrc?.src != null
+      ? imageSrc
+      : { src: imageSrc, fallback: imageFallback, alt: imageAlt }
+  );
+
   const className = `editorial-card${featured ? ' editorial-card--featured' : ''}${
     onClick ? ' editorial-card--button' : ''
   }`;
@@ -36,8 +44,9 @@ export default function EditorialCard({
         variants={imageMotion}
       >
         <MediaImage
-          src={imageSrc}
-          alt={imageAlt}
+          src={img.src}
+          fallback={img.fallback}
+          alt={imageAlt || img.alt}
           aspect="banner"
           rounded={false}
           className="editorial-card__media"

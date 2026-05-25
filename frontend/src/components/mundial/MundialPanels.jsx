@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import FifaFactsPanel from '../FifaFactsPanel';
 import MediaImage from '../ui/MediaImage';
 import PanelHero from './PanelHero';
-import { STADIUM_IMAGES, MUNDIAL_SECTION_IMAGES } from '../../data/siteImages';
+import { STADIUM_IMAGES, MUNDIAL_SECTION_IMAGES, resolveImage } from '../../data/siteImages';
 import {
   MUNDIAL_META,
   QUALIFIED_TEAMS,
@@ -194,10 +194,13 @@ function SedesPanel() {
         ))}
       </div>
       <div className="content-grid content-grid--stadiums mt-8">
-        {filtered.map((s) => (
+        {filtered.map((s) => {
+          const stadiumImg = resolveImage(STADIUM_IMAGES[s.country]);
+          return (
           <article key={s.name} className="grid-cell card card--visual overflow-hidden text-left">
             <MediaImage
-              src={STADIUM_IMAGES[s.country]}
+              src={stadiumImg.src}
+              fallback={stadiumImg.fallback}
               alt={`Estadio ${s.name}`}
               aspect="landscape"
               rounded={false}
@@ -217,7 +220,8 @@ function SedesPanel() {
             </p>
             </div>
           </article>
-        ))}
+        );
+        })}
       </div>
     </div>
   );
@@ -240,6 +244,7 @@ function HistoriaPanel() {
             {idx === 0 && (
               <MediaImage
                 src={MUNDIAL_SECTION_IMAGES.historia.src}
+                fallback={MUNDIAL_SECTION_IMAGES.historia.fallback}
                 alt="Historia del Mundial"
                 aspect="banner"
                 rounded={false}

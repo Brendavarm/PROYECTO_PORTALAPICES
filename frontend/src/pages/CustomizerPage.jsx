@@ -3,11 +3,15 @@ import { AnimatePresence, motion } from 'framer-motion';
 import ProductPreview from '../components/ProductPreview';
 import PageHeader from '../components/ui/PageHeader';
 import { createPersonalizacion } from '../services/api';
-import { COLORS, CARRERAS, SELECCIONES, MODELOS } from '../data/constants';
+import { COLORS, CARRERAS, PRODUCTO_BASE, PLUS_OPCIONES } from '../data/constants';
+import { MUNDIAL_META } from '../data/mundial2026';
+import SeleccionPicker from '../components/SeleccionPicker';
+import { calcularPrecio } from '../utils/producto';
 import { formatBs } from '../utils/currency';
 import MediaImage from '../components/ui/MediaImage';
 import MotionField from '../components/motion/MotionField';
-import { SITE_IMAGES } from '../data/siteImages';
+import { SITE_IMAGES, PRODUCT_PHOTOS } from '../data/siteImages';
+import productHeroSvg from '../assets/covers/product-hero.svg';
 
 export default function CustomizerPage() {
   const [form, setForm] = useState({
@@ -16,14 +20,24 @@ export default function CustomizerPage() {
     carrera: 'Ingeniería de Sistemas',
     color: 'dorado',
     seleccion_favorita: 'Argentina',
-    modelo: 'classic',
+    extras: [],
   });
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(null);
   const [error, setError] = useState(null);
 
   const update = (key, value) => setForm((f) => ({ ...f, [key]: value }));
-  const precio = MODELOS.find((m) => m.id === form.modelo)?.price ?? 50;
+
+  const toggleExtra = (id) => {
+    setForm((f) => ({
+      ...f,
+      extras: f.extras.includes(id)
+        ? f.extras.filter((x) => x !== id)
+        : [...f.extras, id],
+    }));
+  };
+
+  const precio = calcularPrecio(form.extras);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -38,7 +52,8 @@ export default function CustomizerPage() {
         color: form.color,
         seleccion_favorita: form.seleccion_favorita,
         texto_personalizado: form.nombre,
-        modelo: form.modelo,
+        modelo: PRODUCTO_BASE.id,
+        extras: form.extras,
       });
       setSuccess(data);
     } catch (err) {
@@ -59,25 +74,34 @@ export default function CustomizerPage() {
           eyebrow="Tu pedido"
           title="Arma tu"
           highlight="GoalDesk"
-          description="Completa tus datos, elige el modelo y revisa cómo se verá antes de confirmar."
+          description="Un solo modelo: portalapicero con soporte de celular. Suma extras plus si necesitas más compartimentos."
         />
 
         <div className="mt-8 max-w-2xl mx-auto lg:hidden">
           <MediaImage
-            src={SITE_IMAGES.customizer.src}
-            alt={SITE_IMAGES.customizer.alt}
+            src={PRODUCT_PHOTOS.main.src}
+            fallback={productHeroSvg}
+            alt={PRODUCT_PHOTOS.main.alt}
             aspect="wide"
           />
         </div>
 
         <div className="mt-14 grid gap-10 lg:grid-cols-2 lg:gap-14">
-            <motion.form
-              onSubmit={handleSubmit}
-              className="card card-body space-y-6 form-motion"
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-            >
+          <motion.form
+            onSubmit={handleSubmit}
+            className="card card-body space-y-6 form-motion"
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+          >
+            <div className="rounded-xl border border-[var(--border-accent)] bg-[var(--color-gold-muted)] p-4 text-sm">
+              <p className="font-semibold">{PRODUCTO_BASE.name}</p>
+              <p className="mt-1 text-muted leading-relaxed">{PRODUCTO_BASE.desc}</p>
+              <p className="price-tag price-tag--sm mt-3">
+                Desde {formatBs(PRODUCTO_BASE.price)}
+              </p>
+            </div>
+
             <MotionField>
               <label className="field-label" htmlFor="nombre">
                 Nombre completo
@@ -127,7 +151,7 @@ export default function CustomizerPage() {
             </MotionField>
 
             <MotionField>
-              <span className="field-label">Color</span>
+              <span className="field-label">Color del filamento</span>
               <div className="mt-2 flex flex-wrap gap-2">
                 {COLORS.map((c) => (
                   <button
@@ -151,42 +175,61 @@ export default function CustomizerPage() {
             </MotionField>
 
             <MotionField>
-              <label className="field-label" htmlFor="seleccion">
-                Selección favorita
-              </label>
-              <select
-                id="seleccion"
-                value={form.seleccion_favorita}
-                onChange={(e) => update('seleccion_favorita', e.target.value)}
-                className="select-field"
-              >
-                {SELECCIONES.map((s) => (
-                  <option key={s} value={s}>
-                    {s}
-                  </option>
-                ))}
-              </select>
+              <span className="field-label">Tu selección del Mundial 2026</span>
+              <p className="mt-1 text-xs text-muted">
+                Elige una de las {MUNDIAL_META.totalTeams} selecciones clasificadas (equipos
+                nacionales, no clubes). El nombre que ves abajo es el que figurará en tu
+                pedido.
+              </p>
+              <div className="mt-2">
+                <SeleccionPicker
+                  id="seleccion"
+                  value={form.seleccion_favorita}
+                  onChange={(v) => update('seleccion_favorita', v)}
+                />
+              </div>
             </MotionField>
 
             <MotionField>
-              <span className="field-label">Modelo y precio</span>
-              <div className="mt-3 grid gap-4 sm:grid-cols-1 md:grid-cols-3">
-                {MODELOS.map((m) => (
-                  <button
-                    key={m.id}
-                    type="button"
-                    onClick={() => update('modelo', m.id)}
-                    className={`rounded-xl border p-4 text-left transition ${
-                      form.modelo === m.id
-                        ? 'border-[var(--color-gold)] bg-[var(--color-gold-muted)]'
-                        : 'border-[var(--border-subtle)] hover:border-[var(--border-accent)]'
-                    }`}
-                  >
-                    <p className="font-semibold">{m.name}</p>
-                    <p className="mt-1 text-xs text-muted line-clamp-2">{m.desc}</p>
-                    <p className="price-tag price-tag--sm mt-3">{formatBs(m.price)}</p>
-                  </button>
-                ))}
+              <span className="field-label">Extras plus (opcional)</span>
+              <p className="mt-1 text-xs text-muted">
+                El mismo portalapicero; solo cambia la cantidad de compartimentos u otros
+                detalles al imprimir.
+              </p>
+              <div className="mt-3 space-y-3">
+                {PLUS_OPCIONES.map((o) => {
+                  const on = form.extras.includes(o.id);
+                  return (
+                    <button
+                      key={o.id}
+                      type="button"
+                      onClick={() => toggleExtra(o.id)}
+                      className={`flex w-full items-start gap-3 rounded-xl border p-4 text-left transition ${
+                        on
+                          ? 'border-[var(--color-gold)] bg-[var(--color-gold-muted)]'
+                          : 'border-[var(--border-subtle)] hover:border-[var(--border-accent)]'
+                      }`}
+                    >
+                      <span
+                        className={`mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded border text-xs font-bold ${
+                          on
+                            ? 'border-[var(--color-gold)] bg-[var(--color-gold)] text-[var(--bg-base)]'
+                            : 'border-[var(--border-subtle)]'
+                        }`}
+                        aria-hidden
+                      >
+                        {on ? '+' : ''}
+                      </span>
+                      <span className="min-w-0 flex-1">
+                        <span className="font-semibold">{o.label}</span>
+                        <span className="mt-1 block text-xs text-muted">{o.desc}</span>
+                        <span className="price-tag price-tag--sm mt-2 inline-block">
+                          +{formatBs(o.price)}
+                        </span>
+                      </span>
+                    </button>
+                  );
+                })}
               </div>
             </MotionField>
 
@@ -228,9 +271,10 @@ export default function CustomizerPage() {
 
           <aside className="lg:sticky lg:top-28 lg:self-start space-y-6">
             <MediaImage
-              src={SITE_IMAGES.customizer.src}
-              alt={SITE_IMAGES.customizer.alt}
-              aspect="wide"
+              src={PRODUCT_PHOTOS.top.src}
+              fallback={productHeroSvg}
+              alt={PRODUCT_PHOTOS.top.alt}
+              aspect="square"
               className="hidden lg:block"
             />
             <p className="text-center text-sm font-medium text-muted">Así se verá el tuyo</p>
@@ -238,7 +282,7 @@ export default function CustomizerPage() {
               nombre={form.nombre || 'TU NOMBRE'}
               color={form.color}
               seleccion={form.seleccion_favorita}
-              modelo={form.modelo}
+              extras={form.extras}
             />
           </aside>
         </div>

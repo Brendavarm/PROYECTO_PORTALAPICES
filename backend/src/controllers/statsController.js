@@ -1,4 +1,5 @@
 import prisma from '../lib/prisma.js';
+import { parseExtras, EXTRAS_LABELS, PRECIO_BASE_PORTALAPICERO } from '../lib/precios.js';
 
 export async function getStats(req, res) {
   try {
@@ -36,12 +37,34 @@ export async function getStats(req, res) {
       estadoCount[p.estado] = (estadoCount[p.estado] || 0) + 1;
     });
 
+    const extrasCount = {};
+    personalizaciones.forEach((p) => {
+      const list = parseExtras(p.extras);
+      if (!list.length) {
+        extrasCount.estandar = (extrasCount.estandar || 0) + 1;
+        return;
+      }
+      list.forEach((id) => {
+        extrasCount[id] = (extrasCount[id] || 0) + 1;
+      });
+    });
+
     const toSortedArray = (obj) =>
       Object.entries(obj)
         .map(([name, value]) => ({ name, value }))
         .sort((a, b) => b.value - a.value);
 
+    const extrasPopulares = toSortedArray(extrasCount).map((row) => ({
+      name: EXTRAS_LABELS[row.name] ?? row.name,
+      value: row.value,
+    }));
+
     res.json({
+      productoUnico: {
+        id: 'portalapicero',
+        nombre: 'GoalDesk Portalapicero',
+        precioBase: PRECIO_BASE_PORTALAPICERO,
+      },
       totalPedidos,
       ingresosEstimados: Math.round(ingresosEstimados * 100) / 100,
       ventasTotales,
@@ -49,6 +72,7 @@ export async function getStats(req, res) {
       seleccionesPopulares: toSortedArray(seleccionCount),
       coloresPopulares: toSortedArray(colorCount),
       carrerasPopulares: toSortedArray(carreraCount),
+      extrasPopulares,
       pedidosPorEstado: toSortedArray(estadoCount),
       pedidosRecientes: pedidos.slice(0, 10),
     });

@@ -85,39 +85,53 @@ export const CARRERAS = [
   'Contaduría Pública',
 ];
 
-export const SELECCIONES = [
-  'Argentina',
-  'Brasil',
-  'España',
-  'México',
-  'Estados Unidos',
-  'Alemania',
-  'Francia',
-  'Colombia',
-  'Inglaterra',
-  'Portugal',
+/** Reexportado desde mundial2026.js — las 48 selecciones clasificadas */
+export {
+  SELECCIONES_MUNDIAL_2026,
+  SELECCIONES_POR_CONFEDERACION,
+  SELECCION_APODOS,
+  getSeleccionMundial2026,
+} from './mundial2026';
+export { PRODUCT_VIEWS_4, PRODUCT_PHOTOS, PRODUCT_GALLERY } from './siteImages';
+
+/** Único producto físico: portalapicero balón con soporte de celular (UNIFRANZ) */
+export const PRODUCTO_BASE = {
+  id: 'portalapicero',
+  name: 'GoalDesk Portalapicero',
+  price: 50,
+  desc: 'Organizador en forma de balón con soporte para celular, compartimentos para lapiceros y base UNIFRANZ · Ingeniería de Sistemas.',
+};
+
+/** Extras opcionales (plus) sobre el mismo modelo impreso en 3D */
+export const PLUS_OPCIONES = [
+  {
+    id: 'compartimiento_extra',
+    label: '+1 compartimiento',
+    desc: 'Un compartimento adicional para lapiceros o clips.',
+    price: 10,
+  },
+  {
+    id: 'dos_compartimientos_extra',
+    label: '+2 compartimentos',
+    desc: 'Dos divisiones extra en el interior (más capacidad).',
+    price: 18,
+  },
+  {
+    id: 'grabado_destacado',
+    label: 'Grabado destacado en base',
+    desc: 'Tu nombre o frase más visible en la base del pedestal.',
+    price: 8,
+  },
+  {
+    id: 'soporte_celular_ancho',
+    label: 'Soporte celular ancho',
+    desc: 'Ranura más amplia para celulares grandes o con funda.',
+    price: 6,
+  },
 ];
 
-export const MODELOS = [
-  {
-    id: 'classic',
-    name: 'Básico',
-    price: 50,
-    desc: 'Organizador estándar con diseño temática Mundial',
-  },
-  {
-    id: 'pro',
-    name: 'Pro',
-    price: 60,
-    desc: 'Soporte para celular y compartimentos extra',
-  },
-  {
-    id: 'elite',
-    name: 'Elite',
-    price: 70,
-    desc: 'Edición completa con grabado personalizado',
-  },
-];
+/** @deprecated Usar PRODUCTO_BASE — se mantiene solo por compatibilidad con datos viejos */
+export const MODELOS = [PRODUCTO_BASE];
 
 export const FUTURE_FEATURES = [
   { tag: 'Próximo', title: 'Luces inteligentes', desc: 'Iluminación del escritorio que cambia con tus partidos favoritos.' },

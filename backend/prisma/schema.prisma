@@ -25,7 +25,8 @@ model Personalizacion {
   color               String
   seleccion_favorita  String
   texto_personalizado String
-  modelo              String
+  modelo              String   @default("portalapicero")
+  extras              String   @default("[]")
   fecha               DateTime @default(now())
   usuario             Usuario  @relation(fields: [usuario_id], references: [id], onDelete: Cascade)
   pedido              Pedido?

@@ -18,7 +18,7 @@ const STEPS = [
 ];
 
 export default function QRPage() {
-  const { qrValue, isLocalhost, loading, error, refresh } = useQrBaseUrl();
+  const { qrValue, isLocalhost, loading, error, refresh, source } = useQrBaseUrl();
   const [copied, setCopied] = useState(false);
 
   const canShowQr = qrValue && !isLocalhost && !loading;
@@ -48,6 +48,7 @@ export default function QRPage() {
         <div className="mt-8">
           <MediaImage
             src={SITE_IMAGES.qr.src}
+            fallback={SITE_IMAGES.qr.fallback}
             alt="Escanea el código QR del producto"
             aspect="banner"
           />
@@ -62,7 +63,13 @@ export default function QRPage() {
                 <QRCodeSVG value={qrValue} size={240} level="H" includeMargin fgColor="#0c1222" />
               </div>
               <p className="mt-8 text-lg font-semibold">Escanea con tu celular</p>
-              <p className="mt-2 text-sm text-muted">No necesitas instalar ninguna app</p>
+              <p className="mt-2 text-sm text-muted">
+                {source === 'internet'
+                  ? 'Funciona con datos móviles u otra WiFi (enlace público).'
+                  : source === 'red-local'
+                    ? 'Solo funciona en la misma WiFi que esta PC.'
+                    : 'Abre el enlace y llegarás a la página principal.'}
+              </p>
               <button type="button" onClick={copyLink} className="btn btn-secondary btn-sm mt-6">
                 {copied ? 'Enlace copiado' : 'Copiar enlace para compartir'}
               </button>
@@ -128,11 +135,30 @@ export default function QRPage() {
           <summary className="cursor-pointer text-sm font-semibold text-muted">
             Opciones para el equipo (configuración técnica)
           </summary>
-          <div className="mt-6 space-y-4 border-t border-[var(--border-subtle)] pt-6 text-sm text-muted">
+          <div className="mt-6 space-y-4 border-t border-[var(--border-subtle)] pt-6 text-sm text-muted text-left">
+            <p className="font-semibold text-[var(--text-primary)]">
+              Para que funcione fuera de tu WiFi (datos del celular):
+            </p>
+            <ol className="list-decimal list-inside space-y-2">
+              <li>Backend y frontend encendidos (`npm run dev` en cada carpeta).</li>
+              <li>
+                Túnel: en la raíz del proyecto ejecuta{' '}
+                <code className="text-xs">npm run tunnel:cloudflare</code> y copia la URL{' '}
+                <code className="text-xs">https://….trycloudflare.com</code>.
+              </li>
+              <li>
+                En <code className="text-xs">backend/.env</code> pon{' '}
+                <code className="text-xs">PUBLIC_APP_URL</code> y{' '}
+                <code className="text-xs">FRONTEND_URL</code> con esa URL. Reinicia el backend.
+              </li>
+              <li>
+                Recarga esta página y verifica que el enlace abajo sea HTTPS (no localhost ni
+                192.168…).
+              </li>
+            </ol>
             <p>
-              Si el QR no abre en otros celulares, el enlace debe ser público (no decir
-              localhost). Pide ayuda al equipo con la guía en{' '}
-              <span className="text-[var(--color-gold)]">docs/PUBLICAR-EN-INTERNET.md</span>.
+              Guía completa:{' '}
+              <span className="text-[var(--color-gold)]">docs/PUBLICAR-EN-INTERNET.md</span>
             </p>
             {qrValue && (
               <p className="break-all rounded-lg bg-[var(--bg-elevated)] p-3 font-mono text-xs">

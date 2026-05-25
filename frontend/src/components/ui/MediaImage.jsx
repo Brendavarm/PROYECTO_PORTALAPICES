@@ -1,4 +1,8 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+
+function isExternalUrl(url) {
+  return typeof url === 'string' && /^https?:\/\//i.test(url);
+}
 
 export default function MediaImage({
   src,
@@ -10,8 +14,13 @@ export default function MediaImage({
   rounded = true,
   priority = false,
 }) {
-  const [currentSrc, setCurrentSrc] = useState(src);
+  const [currentSrc, setCurrentSrc] = useState(src || fallback);
   const [failed, setFailed] = useState(false);
+
+  useEffect(() => {
+    setCurrentSrc(src || fallback);
+    setFailed(false);
+  }, [src, fallback]);
 
   const handleError = () => {
     if (fallback && currentSrc !== fallback) {
@@ -36,6 +45,7 @@ export default function MediaImage({
           loading={priority ? 'eager' : 'lazy'}
           decoding="async"
           className="media-frame__img"
+          referrerPolicy={isExternalUrl(currentSrc) ? 'no-referrer' : undefined}
           onError={handleError}
         />
       ) : (

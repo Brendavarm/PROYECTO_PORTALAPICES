@@ -1,6 +1,5 @@
-import { Routes, Route, useLocation } from 'react-router-dom';
-import { AnimatePresence } from 'framer-motion';
-import PageTransition from './components/motion/PageTransition';
+import { useLocation } from 'react-router-dom';
+import AnimatedRoutes from './components/motion/AnimatedRoutes';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import LandingPage from './pages/LandingPage';
@@ -9,6 +8,14 @@ import CatalogPage from './pages/CatalogPage';
 import QRPage from './pages/QRPage';
 import AdminPage from './pages/AdminPage';
 import MundialHubPage from './pages/MundialHubPage';
+
+const publicRoutes = [
+  { path: '/', element: <LandingPage /> },
+  { path: '/personalizar', element: <CustomizerPage /> },
+  { path: '/catalogo', element: <CatalogPage /> },
+  { path: '/qr', element: <QRPage /> },
+  { path: '/mundial', element: <MundialHubPage /> },
+];
 
 export default function App() {
   const location = useLocation();
@@ -21,52 +28,8 @@ export default function App() {
       }`}
     >
       {!isAdminArea && <Navbar />}
-      <main>
-        <AnimatePresence mode="wait">
-          <Routes location={location} key={location.pathname}>
-            <Route
-              path="/"
-              element={
-                <PageTransition>
-                  <LandingPage />
-                </PageTransition>
-              }
-            />
-            <Route
-              path="/personalizar"
-              element={
-                <PageTransition>
-                  <CustomizerPage />
-                </PageTransition>
-              }
-            />
-            <Route
-              path="/catalogo"
-              element={
-                <PageTransition>
-                  <CatalogPage />
-                </PageTransition>
-              }
-            />
-            <Route
-              path="/qr"
-              element={
-                <PageTransition>
-                  <QRPage />
-                </PageTransition>
-              }
-            />
-            <Route
-              path="/mundial"
-              element={
-                <PageTransition>
-                  <MundialHubPage />
-                </PageTransition>
-              }
-            />
-            <Route path="/admin" element={<AdminPage />} />
-          </Routes>
-        </AnimatePresence>
+      <main className="main-routes">
+        {isAdminArea ? <AdminPage /> : <AnimatedRoutes routes={publicRoutes} />}
       </main>
       {!isAdminArea && <Footer />}
     </div>

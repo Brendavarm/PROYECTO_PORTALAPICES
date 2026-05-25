@@ -18,6 +18,9 @@ import {
   clearAdminToken,
 } from '../services/api';
 import { formatBs } from '../utils/currency';
+import { PRODUCTO_BASE } from '../data/constants';
+import { etiquetaExtras, parseExtras } from '../utils/producto';
+import { resumenPedidoAdmin } from '../utils/adminPedido';
 
 function getLoadErrorMessage(err) {
   if (err.response?.status === 401) {
@@ -152,6 +155,19 @@ export default function AdminPage() {
           >
             {tab === 'dashboard' && (
               <>
+                <div className="admin-product-banner card card-body mb-6">
+                  <span className="chip chip--gold w-fit text-[10px]">Producto único</span>
+                  <h3 className="heading-md mt-3">
+                    {stats.productoUnico?.nombre ?? PRODUCTO_BASE.name}
+                  </h3>
+                  <p className="mt-2 text-sm text-muted leading-relaxed">
+                    {PRODUCTO_BASE.desc} Precio base{' '}
+                    <strong className="text-[var(--color-gold)]">
+                      {formatBs(stats.productoUnico?.precioBase ?? PRODUCTO_BASE.price)}
+                    </strong>
+                    ; los pedidos suman extras plus encima.
+                  </p>
+                </div>
                 <div className="admin-grid admin-grid--stats">
                   <StatCard
                     variant="admin"
@@ -189,7 +205,8 @@ export default function AdminPage() {
             {tab === 'pedidos' && (
               <div className="admin-panel">
                 <p className="admin-panel__hint">
-                  Elige el estado de cada pedido según avance la fabricación o la entrega.
+                  Todos los pedidos son el mismo portalapicero (base{' '}
+                  {formatBs(PRODUCTO_BASE.price)}). Elige el estado según fabricación o entrega.
                 </p>
                 <div className="admin-table-wrap">
                   <table className="admin-table">
@@ -197,9 +214,11 @@ export default function AdminPage() {
                       <tr>
                         <th>N.º</th>
                         <th>Cliente</th>
+                        <th>Nombre grabado</th>
                         <th>Selección</th>
                         <th>Color</th>
-                        <th>Modelo</th>
+                        <th>Producto</th>
+                        <th>Extras plus</th>
                         <th>Precio</th>
                         <th>Estado del pedido</th>
                       </tr>
@@ -207,14 +226,30 @@ export default function AdminPage() {
                     <tbody>
                       {pedidos.map((p) => {
                         const pers = p.personalizacion;
+                        const resumen = resumenPedidoAdmin(pers, p.precio);
                         return (
                           <tr key={p.id}>
                             <td>#{p.id}</td>
                             <td>{p.usuario?.nombre ?? '—'}</td>
+                            <td className="max-w-[120px] truncate" title={pers?.texto_personalizado}>
+                              {pers?.texto_personalizado?.trim() || '—'}
+                            </td>
                             <td>{pers?.seleccion_favorita || '—'}</td>
                             <td className="capitalize">{pers?.color || '—'}</td>
-                            <td className="capitalize">{pers?.modelo || '—'}</td>
-                            <td className="admin-table__money">{formatBs(p.precio)}</td>
+                            <td className="text-xs whitespace-nowrap">
+                              <span className="chip chip--muted text-[10px]">Portalapicero</span>
+                            </td>
+                            <td className="text-xs max-w-[220px]">
+                              <span className={resumen.legacy ? 'text-amber-400/90' : ''}>
+                                {resumen.extrasLabel}
+                              </span>
+                            </td>
+                            <td className="admin-table__money">
+                              <span className="block">{formatBs(p.precio)}</span>
+                              <span className="block text-[10px] font-normal text-muted mt-0.5">
+                                {resumen.precioLinea}
+                              </span>
+                            </td>
                             <td>
                               <label className="sr-only" htmlFor={`estado-${p.id}`}>
                                 Estado del pedido {p.id}
@@ -283,8 +318,11 @@ export default function AdminPage() {
                             {u.personalizaciones.map((pers) => (
                               <li key={pers.id}>
                                 <span>
-                                  {pers.modelo} · {pers.color} ·{' '}
-                                  {pers.seleccion_favorita}
+                                  {pers.texto_personalizado?.trim()
+                                    ? `"${pers.texto_personalizado.trim()}" · `
+                                    : ''}
+                                  {pers.color} · {pers.seleccion_favorita} ·{' '}
+                                  {etiquetaExtras(parseExtras(pers.extras))}
                                 </span>
                                 <span className="admin-client-card__date">
                                   {new Date(pers.fecha).toLocaleDateString('es-BO')}
@@ -307,7 +345,7 @@ export default function AdminPage() {
                                 <span>
                                   Pedido #{ped.id} — {formatBs(ped.precio)}
                                   {ped.personalizacion
-                                    ? ` · ${ped.personalizacion.modelo}`
+                                    ? ` · ${etiquetaExtras(parseExtras(ped.personalizacion.extras))}`
                                     : ''}
                                 </span>
                                 <span className="admin-client-card__estado">

@@ -31,8 +31,8 @@ export const scaleIn = {
 };
 
 export const pageTransition = {
-  initial: { opacity: 0, y: 16 },
+  initial: { opacity: 0, y: 22 },
   animate: { opacity: 1, y: 0 },
-  exit: { opacity: 0, y: -10 },
-  transition: { duration: 0.4, ease: easeOut },
+  exit: { opacity: 0, y: -14 },
+  transition: { duration: 0.45, ease: easeOut },
 };

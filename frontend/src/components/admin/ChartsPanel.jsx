@@ -91,6 +91,18 @@ export default function ChartsPanel({ stats }) {
     ],
   };
 
+  const extrasData = {
+    labels: stats.extrasPopulares?.map((e) => e.name) || [],
+    datasets: [
+      {
+        label: 'Veces elegido',
+        data: stats.extrasPopulares?.map((e) => e.value) || [],
+        backgroundColor: goldPalette,
+        borderRadius: 8,
+      },
+    ],
+  };
+
   return (
     <div className="admin-charts-grid">
       <div className="admin-chart-card">
@@ -115,6 +127,15 @@ export default function ChartsPanel({ stats }) {
         <h3 className="admin-chart-card__title">Carreras con más pedidos</h3>
         <div className="h-64">
           <Bar data={carreraData} options={chartOptions} />
+        </div>
+      </div>
+      <div className="admin-chart-card admin-chart-card--wide">
+        <h3 className="admin-chart-card__title">Extras plus más pedidos</h3>
+        <p className="admin-chart-card__hint text-xs text-muted mb-3">
+          Mismo modelo portalapicero; los precios suben según los plus elegidos.
+        </p>
+        <div className="h-64">
+          <Bar data={extrasData} options={chartOptions} />
         </div>
       </div>
     </div>

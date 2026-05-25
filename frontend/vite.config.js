@@ -4,6 +4,8 @@ import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
   plugins: [react(), tailwindcss()],
+  base: '/',
+  assetsInclude: ['**/*.svg'],
   server: {
     port: 5173,
     host: '0.0.0.0',

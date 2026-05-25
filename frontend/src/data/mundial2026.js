@@ -178,6 +178,107 @@ export const QUALIFIED_TEAMS = [
   },
 ];
 
+/** Apodos habituales en español (opcional; el grabado usa el nombre oficial). */
+export const SELECCION_APODOS = {
+  Argentina: 'La Albiceleste',
+  Brasil: 'A Seleção',
+  Uruguay: 'La Celeste',
+  Colombia: 'Los Cafeteros',
+  Ecuador: 'La Tri',
+  Paraguay: 'La Albirroja',
+  México: 'El Tri',
+  'Estados Unidos': 'Team USA',
+  Canadá: 'CanMNT',
+  España: 'La Roja',
+  Francia: 'Les Bleus',
+  Alemania: 'Die Mannschaft',
+  Inglaterra: 'Los Tres Leones',
+  Portugal: 'A Seleção das Quinas',
+  'Países Bajos': 'La Naranja Mecánica',
+  Bélgica: 'Los Diablos Rojos',
+  Croacia: 'Los Leones de Dalmacia',
+  Escocia: 'Los Tartan Army',
+  Suiza: 'La Nati',
+  Marruecos: 'Los Leones del Atlas',
+  Senegal: 'Los Leones de Teranga',
+  Ghana: 'Black Stars',
+  'Costa de Marfil': 'Los Elefantes',
+  Japón: 'Samurái Blue',
+  'Corea del Sur': 'Red Devils',
+  'Arabia Saudita': 'Los Halcones Verdes',
+  Irán: 'Team Melli',
+  Australia: 'Los Socceroos',
+  'Nueva Zelanda': 'All Whites',
+  Panamá: 'Los Canaleros',
+  Haití: 'Les Grenadiers',
+  Curazao: 'La Isla Feliz',
+  Qatar: 'Los Cataríes',
+  Turquía: 'Los Halcones',
+  Noruega: 'Løvene',
+  Austria: 'Das Team',
+  Chequia: 'La República Checa',
+  'Rep. Dem. del Congo': 'Los Leopards',
+  Argelia: 'Los Zorros del Desierto',
+  Egipto: 'Los Faraones',
+  Túnez: 'Las Águilas de Cartago',
+  'Sudáfrica': 'Bafana Bafana',
+  Jordania: 'Los Nashama',
+  Uzbekistán: 'Los Lobos de Uzbekistán',
+  'Bosnia y Herzegovina': 'El Dragón Azul',
+  'Cabo Verde': 'Los Tiburones Azules',
+};
+
+function buildSeleccionEntry(team, conf) {
+  const apodo = SELECCION_APODOS[team.name] ?? null;
+  const flag = team.flag ?? '';
+  const label = flag ? `${flag} ${team.name}` : team.name;
+  const optionLabel = apodo ? `${label} — ${apodo}` : label;
+  return {
+    name: team.name,
+    flag,
+    apodo,
+    confederacion: conf.name,
+    confederacionId: conf.id,
+    label,
+    optionLabel,
+    debut: Boolean(team.debut),
+  };
+}
+
+/**
+ * Las 48 selecciones (equipos nacionales) clasificadas al Mundial 2026.
+ * Fuente única para el personalizador y el hub del torneo.
+ */
+export const SELECCIONES_MUNDIAL_2026 = QUALIFIED_TEAMS.flatMap((conf) =>
+  conf.teams.map((team) => buildSeleccionEntry(team, conf))
+).sort((a, b) => a.name.localeCompare(b.name, 'es'));
+
+/** Misma lista agrupada por confederación (para el selector del personalizador). */
+export const SELECCIONES_POR_CONFEDERACION = QUALIFIED_TEAMS.map((conf) => ({
+  id: conf.id,
+  name: conf.name,
+  teams: conf.teams.map((team) => buildSeleccionEntry(team, conf)),
+}));
+
+export function getSeleccionMundial2026(nombre) {
+  return SELECCIONES_MUNDIAL_2026.find((s) => s.name === nombre);
+}
+
+export function normalizeSeleccionQuery(texto) {
+  return texto
+    .normalize('NFD')
+    .replace(/\p{M}/gu, '')
+    .toLowerCase()
+    .trim();
+}
+
+export function seleccionCoincideBusqueda(seleccion, query) {
+  if (!query) return true;
+  const q = normalizeSeleccionQuery(query);
+  const campos = [seleccion.name, seleccion.apodo, seleccion.confederacion].filter(Boolean);
+  return campos.some((c) => normalizeSeleccionQuery(c).includes(q));
+}
+
 export const FIRST_TIME_TEAMS = [
   {
     name: 'Cabo Verde',

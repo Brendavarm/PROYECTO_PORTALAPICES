@@ -1,10 +1,7 @@
 import prisma from '../lib/prisma.js';
+import { calcularPrecioPedido, parseExtras } from '../lib/precios.js';
 
-const PRECIOS_MODELO = {
-  classic: 50,
-  pro: 60,
-  elite: 70,
-};
+const MODELO_UNICO = 'portalapicero';
 
 export async function createPersonalizacion(req, res) {
   try {
@@ -16,13 +13,17 @@ export async function createPersonalizacion(req, res) {
       seleccion_favorita,
       texto_personalizado,
       modelo,
+      extras,
     } = req.body;
 
-    if (!nombre || !correo || !color || !seleccion_favorita || !modelo) {
+    if (!nombre || !correo || !color || !seleccion_favorita) {
       return res.status(400).json({
-        error: 'nombre, correo, color, seleccion_favorita y modelo son requeridos',
+        error: 'nombre, correo, color y seleccion_favorita son requeridos',
       });
     }
+
+    const extrasList = parseExtras(extras);
+    const extrasJson = JSON.stringify(extrasList);
 
     const usuario = await prisma.usuario.upsert({
       where: { correo },
@@ -43,11 +44,12 @@ export async function createPersonalizacion(req, res) {
         color,
         seleccion_favorita,
         texto_personalizado: texto_personalizado || nombre,
-        modelo,
+        modelo: modelo || MODELO_UNICO,
+        extras: extrasJson,
       },
     });
 
-    const precio = PRECIOS_MODELO[modelo] || 50;
+    const precio = calcularPrecioPedido(extrasList);
 
     const pedido = await prisma.pedido.create({
       data: {

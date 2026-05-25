@@ -1,14 +1,20 @@
+import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { SITE_IMAGES } from '../data/siteImages';
+import { PRODUCT_PHOTOS } from '../data/siteImages';
+import productHeroSvg from '../assets/covers/product-hero.svg';
 
-/** Vista del producto en el hero — imagen grande y siempre visible */
+/** Vista del producto en el hero — foto real con respaldo local */
 export default function HeroProduct() {
+  const { src, alt } = PRODUCT_PHOTOS.hero;
+  const fallback = productHeroSvg;
+  const [imgSrc, setImgSrc] = useState(src);
+
   return (
     <motion.div
       className="product-showcase product-showcase--hero"
-      initial={{ opacity: 0, y: 40, scale: 0.96 }}
+      initial={{ opacity: 0, y: 32, scale: 0.94 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
-      transition={{ delay: 0.45, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ delay: 0.35, duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
     >
       <motion.div
         className="product-showcase__frame"
@@ -16,17 +22,18 @@ export default function HeroProduct() {
         transition={{ duration: 4.5, repeat: Infinity, ease: 'easeInOut' }}
       >
         <img
-          src={SITE_IMAGES.productHero.src}
-          alt={SITE_IMAGES.productHero.alt}
+          src={imgSrc}
+          alt={alt}
           className="product-showcase__img"
-          width={400}
-          height={520}
+          width={480}
+          height={600}
           loading="eager"
           decoding="async"
+          referrerPolicy="no-referrer"
+          onError={() => {
+            if (fallback && imgSrc !== fallback) setImgSrc(fallback);
+          }}
         />
-        <span className="product-showcase__badge">
-          Impreso en 3D
-        </span>
       </motion.div>
     </motion.div>
   );

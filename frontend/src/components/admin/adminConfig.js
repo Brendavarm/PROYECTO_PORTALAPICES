@@ -2,13 +2,15 @@ export const ADMIN_SECTIONS = [
   {
     id: 'dashboard',
     label: 'Resumen',
-    description: 'Vista general de pedidos, clientes e ingresos.',
+    description:
+      'Un solo producto (portalapicero desde Bs 50) + extras plus. Pedidos, clientes e ingresos.',
     icon: 'chart',
   },
   {
     id: 'pedidos',
     label: 'Pedidos',
-    description: 'Lista de pedidos y cambio de estado de cada uno.',
+    description:
+      'Cada pedido es un portalapicero personalizado: color, selección, nombre y extras plus.',
     icon: 'box',
   },
   {

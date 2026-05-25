@@ -26,6 +26,7 @@ export default function MundialHubPage() {
       <section className="hero-cinematic hero-cinematic--short">
         <MediaImage
           src={SITE_IMAGES.football.src}
+          fallback={SITE_IMAGES.football.fallback}
           alt={SITE_IMAGES.football.alt}
           aspect="cinematic"
           rounded={false}
@@ -90,7 +91,8 @@ export default function MundialHubPage() {
         <div className="section-centered max-w-xl text-center">
           <h2 className="heading-lg">¿Quieres tu GoalDesk del Mundial?</h2>
           <p className="text-lead mx-auto mt-4">
-            Personaliza color, selección y modelo. Ideal para regalo o para tu escritorio en
+            Personaliza color, selección y extras plus en tu portalapicero. Ideal para regalo o
+            para tu escritorio en
             UNIFRANZ.
           </p>
           <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">

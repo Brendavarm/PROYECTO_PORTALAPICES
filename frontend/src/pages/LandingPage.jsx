@@ -11,9 +11,15 @@ import AnimatedHeadline from '../components/motion/AnimatedHeadline';
 import MarqueeStrip from '../components/motion/MarqueeStrip';
 import { StaggerGrid, StaggerItem } from '../components/motion/StaggerGrid';
 import { formatBs } from '../utils/currency';
-import { FUTURE_FEATURES, MODELOS } from '../data/constants';
+import { FUTURE_FEATURES, PRODUCTO_BASE, PLUS_OPCIONES } from '../data/constants';
 import { MUNDIAL_TOPICS, MUNDIAL_META } from '../data/mundial2026';
-import { SITE_IMAGES, FEATURE_IMAGES, MODEL_IMAGES } from '../data/siteImages';
+import {
+  SITE_IMAGES,
+  FEATURE_IMAGES,
+  PRODUCT_VIEWS_4,
+  resolveImage,
+} from '../data/siteImages';
+import ProductGallery from '../components/ProductGallery';
 
 const PRODUCT_FEATURES = [
   { icon: 'ball', title: 'Estilo Mundial', desc: 'Diseño inspirado en la Copa 2026 para tu escritorio.' },
@@ -30,7 +36,13 @@ function SectionWrap({ children, alt = false }) {
   );
 }
 
-function StaticEditorialCard({ featured, imageSrc, imageAlt, icon, title, desc, children }) {
+function StaticEditorialCard({ featured, imageSrc, imageAlt, imageFallback, icon, title, desc, children }) {
+  const img = resolveImage(
+    typeof imageSrc === 'object' && imageSrc?.src
+      ? imageSrc
+      : { src: imageSrc, fallback: imageFallback, alt: imageAlt }
+  );
+
   return (
     <StaggerItem>
       <motion.article
@@ -46,8 +58,9 @@ function StaticEditorialCard({ featured, imageSrc, imageAlt, icon, title, desc, 
           transition={{ duration: 0.4 }}
         >
           <MediaImage
-            src={imageSrc}
-            alt={imageAlt}
+            src={img.src}
+            fallback={img.fallback}
+            alt={imageAlt || img.alt}
             aspect="banner"
             rounded={false}
             className="editorial-card__media"
@@ -68,14 +81,14 @@ function StaticEditorialCard({ featured, imageSrc, imageAlt, icon, title, desc, 
 
 export default function LandingPage() {
   return (
-    <div className="landing-page landing-page--premium landing-page--motion">
+    <motion.div
+      className="landing-page landing-page--premium landing-page--motion"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+    >
       <section className="hero-cinematic">
-        <motion.div
-          className="hero-cinematic__bg-wrap"
-          initial={{ scale: 1.08 }}
-          animate={{ scale: 1 }}
-          transition={{ duration: 1.4, ease: [0.22, 1, 0.36, 1] }}
-        >
+        <div className="hero-cinematic__bg-wrap hero-cinematic__bg-wrap--enter">
           <MediaImage
             src={SITE_IMAGES.hero.src}
             fallback={SITE_IMAGES.hero.fallback}
@@ -85,11 +98,11 @@ export default function LandingPage() {
             priority
             className="hero-cinematic__bg"
           />
-        </motion.div>
+        </div>
         <MotionBackdrop intensity="medium" />
         <div className="hero-cinematic__shade" aria-hidden />
         <div className="hero-cinematic__grid container-app">
-          <div className="hero-cinematic__content">
+          <div className="hero-cinematic__content hero-cinematic__content--enter">
             <motion.p
               className="eyebrow eyebrow--light"
               initial={{ opacity: 0, x: -20 }}
@@ -117,7 +130,8 @@ export default function LandingPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.55, duration: 0.5 }}
             >
-              Organizador impreso en 3D. Elige modelo, color y selección — pídelo en minutos.
+              Portalapicero con soporte de celular. Elige color, selección y extras plus — desde{' '}
+              {formatBs(PRODUCTO_BASE.price)}.
             </motion.p>
             <motion.div
               className="hero-cinematic__actions"
@@ -126,7 +140,7 @@ export default function LandingPage() {
               transition={{ delay: 0.65, duration: 0.5 }}
             >
               <Link to="/personalizar" className="btn btn-primary btn--lg">
-                Quiero el mío — {formatBs(50)}
+                Quiero el mío — {formatBs(PRODUCTO_BASE.price)}
               </Link>
               <Link to="/mundial" className="btn btn-ghost">
                 Centro del Mundial
@@ -138,14 +152,12 @@ export default function LandingPage() {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.8, duration: 0.5 }}
             >
-              {MODELOS.map((m) => (
-                <span key={m.id} className="chip chip--glass">
-                  {m.name} · {formatBs(m.price)}
-                </span>
-              ))}
+              <span className="chip chip--glass">Soporte celular incluido</span>
+              <span className="chip chip--glass">Base UNIFRANZ</span>
+              <span className="chip chip--glass">Desde {formatBs(PRODUCTO_BASE.price)}</span>
             </motion.div>
           </div>
-          <div className="hero-cinematic__product">
+          <div className="hero-cinematic__product hero-cinematic__product--enter">
             <HeroProduct />
           </div>
         </div>
@@ -169,6 +181,7 @@ export default function LandingPage() {
         >
           <MediaImage
             src={SITE_IMAGES.countdown.src}
+            fallback={SITE_IMAGES.countdown.fallback}
             alt={SITE_IMAGES.countdown.alt}
             aspect="wide"
             className="countdown-stage__bg"
@@ -206,30 +219,65 @@ export default function LandingPage() {
       <SectionWrap>
         <PageHeader
           center
-          title="Elige tu"
-          highlight="modelo"
-          description="Empieza en Bs 50. Cada plan suma Bs 10."
+          eyebrow="Fotos reales"
+          title="Visto desde"
+          highlight="todos los ángulos"
+          description="Impreso en 3D: frente con soporte de celular, laterales, vista superior y más."
         />
-        <StaggerGrid className="editorial-grid editorial-grid--3 mt-14">
-          {MODELOS.map((m, i) => (
-            <StaticEditorialCard
-              key={m.id}
-              featured={i === 1}
-              imageSrc={MODEL_IMAGES[m.id]?.src}
-              imageAlt={MODEL_IMAGES[m.id]?.alt ?? m.name}
-              title={m.name}
-              desc={m.desc}
-            >
-              {i === 1 ? (
-                <span className="chip chip--gold mb-3 w-fit">Recomendado</span>
-              ) : null}
-              <p className="price-tag price-tag--lg mt-3">{formatBs(m.price)}</p>
+        <motion.div
+          className="mt-12 max-w-4xl mx-auto"
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+        >
+          <ProductGallery views={PRODUCT_VIEWS_4} defaultId="front" priority />
+        </motion.div>
+      </SectionWrap>
+
+      <SectionWrap alt>
+        <PageHeader
+          center
+          title="Un solo"
+          highlight="producto"
+          description={`${PRODUCTO_BASE.name}: balón organizador con ranura para celular. Suma extras plus si quieres más compartimentos.`}
+        />
+        <div className="mt-14 grid gap-10 lg:grid-cols-2 lg:gap-14 items-start">
+          <motion.article
+            className="card overflow-hidden h-full flex flex-col"
+            initial={{ opacity: 0, x: -16 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+          >
+            <div className="p-4 sm:p-5 border-b border-[var(--border-subtle)]">
+              <ProductGallery views={PRODUCT_VIEWS_4} defaultId="front" priority />
+            </div>
+            <div className="card-body flex flex-col flex-1">
+              <span className="chip chip--gold w-fit">Incluye soporte de celular</span>
+              <h3 className="heading-md mt-4">{PRODUCTO_BASE.name}</h3>
+              <p className="mt-3 text-sm leading-relaxed text-muted flex-1">{PRODUCTO_BASE.desc}</p>
+              <p className="price-tag price-tag--lg mt-6">{formatBs(PRODUCTO_BASE.price)}</p>
               <Link to="/personalizar" className="btn btn-primary mt-5 w-full">
-                Elegir {m.name}
+                Personalizar el mío
               </Link>
-            </StaticEditorialCard>
-          ))}
-        </StaggerGrid>
+            </div>
+          </motion.article>
+          <StaggerGrid className="editorial-grid editorial-grid--2">
+            {PLUS_OPCIONES.map((o) => (
+              <StaggerItem key={o.id}>
+                <motion.article
+                  className="card card-body h-full text-left"
+                  whileHover={{ y: -4, borderColor: 'rgba(201, 162, 39, 0.35)' }}
+                >
+                  <span className="chip chip--muted w-fit text-[10px]">Plus</span>
+                  <h3 className="heading-md mt-3">{o.label}</h3>
+                  <p className="mt-2 text-sm text-muted leading-relaxed">{o.desc}</p>
+                  <p className="price-tag price-tag--sm mt-4">+{formatBs(o.price)}</p>
+                </motion.article>
+              </StaggerItem>
+            ))}
+          </StaggerGrid>
+        </div>
       </SectionWrap>
 
       <SectionWrap alt>
@@ -244,7 +292,7 @@ export default function LandingPage() {
             <StaggerItem key={topic.id}>
               <EditorialCard
                 to={`/mundial?seccion=${topic.id}`}
-                imageSrc={topic.image?.src}
+                imageSrc={topic.image}
                 imageAlt={topic.image?.alt ?? topic.label}
                 icon={topic.icon}
                 label={topic.label}
@@ -298,6 +346,7 @@ export default function LandingPage() {
         >
           <MediaImage
             src={SITE_IMAGES.product.src}
+            fallback={SITE_IMAGES.product.fallback}
             alt={SITE_IMAGES.product.alt}
             aspect="cinematic"
             rounded={false}
@@ -314,7 +363,7 @@ export default function LandingPage() {
         >
           <h2 className="heading-display heading-display--sm">¿Listo para el tuyo?</h2>
           <p className="hero-cinematic__lead mt-5 text-center">
-            Color, selección y modelo en pocos pasos. Desde {formatBs(50)}.
+            Color, selección y extras plus en pocos pasos. Desde {formatBs(PRODUCTO_BASE.price)}.
           </p>
           <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <Link to="/personalizar" className="btn btn-primary btn--lg">
@@ -326,6 +375,6 @@ export default function LandingPage() {
           </div>
         </motion.div>
       </section>
-    </div>
+    </motion.div>
   );
 }

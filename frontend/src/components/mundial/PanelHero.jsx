@@ -8,6 +8,7 @@ export default function PanelHero({ section }) {
   return (
     <MediaImage
       src={img.src}
+      fallback={img.fallback}
       alt={img.alt}
       aspect="wide"
       className="mundial-panel-hero"
