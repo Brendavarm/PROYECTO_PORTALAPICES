@@ -20,7 +20,9 @@ Copia siempre desde `.env.example`. **Nunca** subas `.env` a GitHub.
 |----------|-------------|-------------|
 | `VITE_API_URL` | Sí en dev | Usar `/api` para que Vite haga proxy al backend |
 | `VITE_APP_URL` | Opcional | URL base para generar QR (IP local o dominio público) |
-| `VITE_SOCIAL_URL` | Opcional | Enlace Instagram u otra red en página QR |
+| `VITE_INSTAGRAM_URL` | Opcional | Instagram oficial (default: @goaldesk_franz) |
+| `VITE_TIKTOK_URL` | Opcional | TikTok oficial (default: @goaldesk_franz) |
+| `VITE_SOCIAL_URL` | Opcional | Alias legado de Instagram |
 
 ## Ejemplo mínimo para desarrollo local
 
@@ -39,7 +41,8 @@ ADMIN_TOKEN=cambiar-por-un-token-largo-en-produccion
 
 ```env
 VITE_API_URL=/api
-VITE_SOCIAL_URL=https://www.instagram.com/unifranzoficial
+VITE_INSTAGRAM_URL=https://www.instagram.com/goaldesk_franz
+VITE_TIKTOK_URL=https://www.tiktok.com/@goaldesk_franz
 ```
 
 ## Producción

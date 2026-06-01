@@ -8,10 +8,7 @@ import { MUNDIAL_META } from '../data/mundial2026';
 import SeleccionPicker from '../components/SeleccionPicker';
 import { calcularPrecio } from '../utils/producto';
 import { formatBs } from '../utils/currency';
-import MediaImage from '../components/ui/MediaImage';
 import MotionField from '../components/motion/MotionField';
-import { SITE_IMAGES, PRODUCT_PHOTOS } from '../data/siteImages';
-import productHeroSvg from '../assets/covers/product-hero.svg';
 
 export default function CustomizerPage() {
   const [form, setForm] = useState({
@@ -76,15 +73,6 @@ export default function CustomizerPage() {
           highlight="GoalDesk"
           description="Un solo modelo: portalapicero con soporte de celular. Suma extras plus si necesitas más compartimentos."
         />
-
-        <div className="mt-8 max-w-2xl mx-auto lg:hidden">
-          <MediaImage
-            src={PRODUCT_PHOTOS.main.src}
-            fallback={productHeroSvg}
-            alt={PRODUCT_PHOTOS.main.alt}
-            aspect="wide"
-          />
-        </div>
 
         <div className="mt-14 grid gap-10 lg:grid-cols-2 lg:gap-14">
           <motion.form
@@ -270,13 +258,6 @@ export default function CustomizerPage() {
           </motion.form>
 
           <aside className="lg:sticky lg:top-28 lg:self-start space-y-6">
-            <MediaImage
-              src={PRODUCT_PHOTOS.top.src}
-              fallback={productHeroSvg}
-              alt={PRODUCT_PHOTOS.top.alt}
-              aspect="square"
-              className="hidden lg:block"
-            />
             <p className="text-center text-sm font-medium text-muted">Así se verá el tuyo</p>
             <ProductPreview
               nombre={form.nombre || 'TU NOMBRE'}

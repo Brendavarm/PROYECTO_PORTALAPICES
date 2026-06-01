@@ -20,6 +20,10 @@ import {
   resolveImage,
 } from '../data/siteImages';
 import ProductGallery from '../components/ProductGallery';
+import HeroBackgroundVideo from '../components/HeroBackgroundVideo';
+import SocialLinks from '../components/SocialLinks';
+import VideoShowcase from '../components/VideoShowcase';
+import { PROMO_VIDEOS } from '../data/siteVideos';
 
 const PRODUCT_FEATURES = [
   { icon: 'ball', title: 'Estilo Mundial', desc: 'Diseño inspirado en la Copa 2026 para tu escritorio.' },
@@ -89,15 +93,7 @@ export default function LandingPage() {
     >
       <section className="hero-cinematic">
         <div className="hero-cinematic__bg-wrap hero-cinematic__bg-wrap--enter">
-          <MediaImage
-            src={SITE_IMAGES.hero.src}
-            fallback={SITE_IMAGES.hero.fallback}
-            alt={SITE_IMAGES.hero.alt}
-            aspect="cinematic"
-            rounded={false}
-            priority
-            className="hero-cinematic__bg"
-          />
+          <HeroBackgroundVideo />
         </div>
         <MotionBackdrop intensity="medium" />
         <div className="hero-cinematic__shade" aria-hidden />
@@ -145,6 +141,15 @@ export default function LandingPage() {
               <Link to="/mundial" className="btn btn-ghost">
                 Centro del Mundial
               </Link>
+            </motion.div>
+            <motion.div
+              className="hero-cinematic__social"
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.72, duration: 0.5 }}
+            >
+              <p className="hero-cinematic__social-lead">Redes oficiales</p>
+              <SocialLinks variant="pills" />
             </motion.div>
             <motion.div
               className="hero-cinematic__chips"
@@ -336,6 +341,20 @@ export default function LandingPage() {
             </StaggerItem>
           ))}
         </StaggerGrid>
+      </SectionWrap>
+
+      <SectionWrap alt>
+        <PageHeader
+          center
+          eyebrow="En video"
+          title="GoalDesk"
+          highlight="en acción"
+          description="Se reproducen solos al cargar la página (silenciados). Usa Pausar o Activa sonido cuando quieras."
+        />
+        <div className="video-showcase-grid container-app mt-12">
+          <VideoShowcase config={PROMO_VIDEOS.main} variant="card" autoStart playOnMount />
+          <VideoShowcase config={PROMO_VIDEOS.secondary} variant="card" autoStart playOnMount />
+        </div>
       </SectionWrap>
 
       <section className="section-block cta-cinematic">

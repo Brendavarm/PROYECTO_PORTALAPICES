@@ -8,6 +8,8 @@ import { formatBs } from '../utils/currency';
 import MediaImage from '../components/ui/MediaImage';
 import { PRODUCT_VIEWS_4, PRODUCT_PHOTOS } from '../data/siteImages';
 import ProductGallery from '../components/ProductGallery';
+import VideoShowcase from '../components/VideoShowcase';
+import { PROMO_VIDEOS } from '../data/siteVideos';
 import productHeroSvg from '../assets/covers/product-hero.svg';
 
 const fallbackProduct = {
@@ -75,6 +77,30 @@ export default function CatalogPage() {
 
             <div className="space-y-6">
               <ScrollReveal delay={0.05}>
+                <div className="card card-body">
+                  <p className="eyebrow">En video</p>
+                  <h3 className="heading-md mt-2">{PROMO_VIDEOS.main.title}</h3>
+                  <VideoShowcase
+                    config={PROMO_VIDEOS.main}
+                    variant="compact"
+                    className="mt-4 !p-0"
+                    autoStart
+                  />
+                </div>
+              </ScrollReveal>
+              <ScrollReveal delay={0.08}>
+                <div className="card card-body">
+                  <p className="eyebrow">{PROMO_VIDEOS.secondary.badge}</p>
+                  <h3 className="heading-md mt-2">{PROMO_VIDEOS.secondary.title}</h3>
+                  <VideoShowcase
+                    config={PROMO_VIDEOS.secondary}
+                    variant="compact"
+                    className="mt-4 !p-0"
+                    autoStart
+                  />
+                </div>
+              </ScrollReveal>
+              <ScrollReveal delay={0.1}>
                 <MediaImage
                   src={PRODUCT_PHOTOS.group.src}
                   fallback={productHeroSvg}

@@ -9,6 +9,7 @@ import { getPedidos, updatePedidoEstado } from '../controllers/pedidosController
 import { getProductos } from '../controllers/productosController.js';
 import { getStats } from '../controllers/statsController.js';
 import { getNetworkInfo } from '../controllers/networkController.js';
+import { postChatMessage, getChatStatus } from '../controllers/chatController.js';
 import { requireAdmin } from '../middleware/requireAdmin.js';
 
 const router = Router();
@@ -22,6 +23,9 @@ router.get('/health', (req, res) => {
 });
 
 router.get('/network-info', getNetworkInfo);
+
+router.get('/chat/status', getChatStatus);
+router.post('/chat', postChatMessage);
 
 router.post('/admin/login', adminLogin);
 

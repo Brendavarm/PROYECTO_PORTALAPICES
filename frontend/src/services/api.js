@@ -38,6 +38,9 @@ export const getPedidos = () => api.get('/pedidos');
 export const getProductos = () => api.get('/productos');
 export const getPersonalizaciones = () => api.get('/personalizaciones');
 export const createPersonalizacion = (data) => api.post('/personalizaciones', data);
+export const postChatMessage = (message, history = []) =>
+  api.post('/chat', { message, history });
+export const getChatStatus = () => api.get('/chat/status');
 export const updatePedidoEstado = (id, estado) =>
   api.patch(`/pedidos/${id}/estado`, { estado });
 

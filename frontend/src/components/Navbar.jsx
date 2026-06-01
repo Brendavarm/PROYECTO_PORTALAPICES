@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import ThemeToggle from './ThemeToggle';
+import SocialLinks from './SocialLinks';
 
 const links = [
   { to: '/', label: 'Inicio' },
@@ -61,6 +62,7 @@ export default function Navbar() {
           <Link to="/admin" className="nav-link text-xs">
             Admin
           </Link>
+          <SocialLinks variant="icons" className="nav-social" />
           <ThemeToggle />
           <Link to="/personalizar" className="btn btn-primary btn-sm">
             Pedir el mío
@@ -86,7 +88,8 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
           >
-            <div className="mb-3 flex justify-end">
+            <div className="mb-4 flex items-center justify-between gap-3">
+              <SocialLinks variant="pills" className="social-links--mobile-menu flex-1" />
               <ThemeToggle />
             </div>
             {links.map((l) => (

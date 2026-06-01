@@ -5,7 +5,7 @@
 | Archivo | Uso en la web |
 |---------|----------------|
 | `sec-hero.jpg` | Portada — Luzhniki, final Mundial 2018 |
-| `sec-product-hero.jpg` | Hero producto — balón |
+| `sec-product-hero.jpg` | ⚠️ Revisar: debe ser foto del portalapicero, no otro deporte |
 | `sec-product.jpg` | Bloque producto / modelo Básico |
 | `sec-hero-accent.jpg` | Banner catálogo |
 | `sec-countdown.jpg` | Cuenta regresiva |

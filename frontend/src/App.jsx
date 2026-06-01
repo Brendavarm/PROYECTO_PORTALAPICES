@@ -8,6 +8,7 @@ import CatalogPage from './pages/CatalogPage';
 import QRPage from './pages/QRPage';
 import AdminPage from './pages/AdminPage';
 import MundialHubPage from './pages/MundialHubPage';
+import GoalDeskChat from './components/chat/GoalDeskChat';
 
 const publicRoutes = [
   { path: '/', element: <LandingPage /> },
@@ -32,6 +33,7 @@ export default function App() {
         {isAdminArea ? <AdminPage /> : <AnimatedRoutes routes={publicRoutes} />}
       </main>
       {!isAdminArea && <Footer />}
+      {!isAdminArea && <GoalDeskChat />}
     </div>
   );
 }

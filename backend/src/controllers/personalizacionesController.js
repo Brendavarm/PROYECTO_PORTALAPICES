@@ -1,7 +1,5 @@
 import prisma from '../lib/prisma.js';
-import { calcularPrecioPedido, parseExtras } from '../lib/precios.js';
-
-const MODELO_UNICO = 'portalapicero';
+import { crearPedidoPersonalizado } from '../services/pedidoService.js';
 
 export async function createPersonalizacion(req, res) {
   try {
@@ -22,42 +20,15 @@ export async function createPersonalizacion(req, res) {
       });
     }
 
-    const extrasList = parseExtras(extras);
-    const extrasJson = JSON.stringify(extrasList);
-
-    const usuario = await prisma.usuario.upsert({
-      where: { correo },
-      update: {
-        nombre,
-        carrera: carrera || 'Ingeniería de Sistemas',
-      },
-      create: {
-        nombre,
-        correo,
-        carrera: carrera || 'Ingeniería de Sistemas',
-      },
-    });
-
-    const personalizacion = await prisma.personalizacion.create({
-      data: {
-        usuario_id: usuario.id,
-        color,
-        seleccion_favorita,
-        texto_personalizado: texto_personalizado || nombre,
-        modelo: modelo || MODELO_UNICO,
-        extras: extrasJson,
-      },
-    });
-
-    const precio = calcularPrecioPedido(extrasList);
-
-    const pedido = await prisma.pedido.create({
-      data: {
-        usuario_id: usuario.id,
-        personalizacion_id: personalizacion.id,
-        precio,
-        estado: 'pendiente',
-      },
+    const { usuario, personalizacion, pedido } = await crearPedidoPersonalizado({
+      nombre,
+      correo,
+      carrera,
+      color,
+      seleccion_favorita,
+      texto_personalizado,
+      modelo,
+      extras,
     });
 
     res.status(201).json({

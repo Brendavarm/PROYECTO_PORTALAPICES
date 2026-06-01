@@ -6,9 +6,7 @@ import FeatureIcon from '../components/ui/FeatureIcon';
 import { useQrBaseUrl } from '../hooks/useQrBaseUrl';
 import MediaImage from '../components/ui/MediaImage';
 import { SITE_IMAGES } from '../data/siteImages';
-
-const SOCIAL_URL =
-  import.meta.env.VITE_SOCIAL_URL || 'https://www.instagram.com/unifranzoficial';
+import { GOALDESK_SOCIAL } from '../data/socialLinks';
 
 const STEPS = [
   { n: '1', text: 'Abre la cámara de tu celular.' },
@@ -117,18 +115,31 @@ export default function QRPage() {
             <p className="heading-md mt-4">Armar el mío</p>
             <p className="mt-2 text-sm text-muted">Elige color y selección</p>
           </Link>
-          <a
-            href={SOCIAL_URL}
-            target="_blank"
-            rel="noreferrer"
-            className="card card--interactive card-body text-center"
-          >
+          <div className="card card-body text-center">
             <div className="card-icon-wrap mx-auto">
               <FeatureIcon name="link" className="h-5 w-5" />
             </div>
             <p className="heading-md mt-4">Síguenos</p>
-            <p className="mt-2 text-sm text-muted">Redes UNIFRANZ</p>
-          </a>
+            <p className="mt-2 text-sm text-muted">Cuentas oficiales GoalDesk</p>
+            <div className="mt-4 flex flex-col gap-2 text-sm">
+              <a
+                href={GOALDESK_SOCIAL.instagram.url}
+                target="_blank"
+                rel="noreferrer"
+                className="text-[var(--color-gold)] underline-offset-4 hover:underline"
+              >
+                Instagram {GOALDESK_SOCIAL.instagram.handle}
+              </a>
+              <a
+                href={GOALDESK_SOCIAL.tiktok.url}
+                target="_blank"
+                rel="noreferrer"
+                className="text-[var(--color-gold)] underline-offset-4 hover:underline"
+              >
+                TikTok {GOALDESK_SOCIAL.tiktok.handle}
+              </a>
+            </div>
+          </div>
         </section>
 
         <details className="advanced-qr card card-body mt-14">

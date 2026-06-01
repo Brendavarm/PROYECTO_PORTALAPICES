@@ -1,7 +1,5 @@
 import { Link } from 'react-router-dom';
-
-const SOCIAL_URL =
-  import.meta.env.VITE_SOCIAL_URL || 'https://www.instagram.com/unifranzoficial';
+import SocialLinks from './SocialLinks';
 
 export default function Footer() {
   return (
@@ -37,15 +35,8 @@ export default function Footer() {
           </nav>
         </div>
         <div>
-          <p className="text-sm font-semibold">Contacto</p>
-          <a
-            href={SOCIAL_URL}
-            target="_blank"
-            rel="noreferrer"
-            className="mt-3 inline-block text-sm text-muted underline-offset-4 hover:text-[var(--color-gold)] hover:underline"
-          >
-            Instagram
-          </a>
+          <p className="text-sm font-semibold">Redes oficiales</p>
+          <SocialLinks variant="text" className="mt-3" />
           <p className="mt-6 text-xs text-muted">© 2026 GoalDesk Smart — UNIFRANZ</p>
         </div>
       </div>

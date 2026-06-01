@@ -135,7 +135,7 @@ npm run db:seed
 |----------|--------|
 | `VITE_API_URL` | `https://goaldesk-api.onrender.com/api` |
 | `VITE_APP_URL` | `https://tu-proyecto.vercel.app` (la da Vercel al desplegar) |
-| `VITE_SOCIAL_URL` | Tu Instagram |
+| `VITE_INSTAGRAM_URL` / `VITE_TIKTOK_URL` | @goaldesk_franz (oficial) |
 
 4. Deploy.  
 5. Vuelve a Render y actualiza `FRONTEND_URL` y `PUBLIC_APP_URL` con la URL real de Vercel. Redeploy API si hace falta.
